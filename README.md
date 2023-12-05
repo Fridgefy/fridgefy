@@ -1,0 +1,2 @@
+# fridgefy
+Fridge management app
