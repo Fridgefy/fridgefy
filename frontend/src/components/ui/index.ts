@@ -1,3 +1,9 @@
-import { Button, buttonVariants } from './button';
-
-export { Button, buttonVariants };
+export { Button, buttonVariants } from './button';
+export {
+  Card,
+  CardHeader,
+  CardFooter,
+  CardTitle,
+  CardDescription,
+  CardContent,
+} from './card';
