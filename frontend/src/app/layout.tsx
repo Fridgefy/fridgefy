@@ -4,6 +4,7 @@ import '@/styles/globals.css';
 import { inter } from '@/confg/fonts';
 import { cn } from '@/lib/tailwind/utils';
 import { siteConfig } from '@/confg/site';
+import { HeaderLayout } from '@/components/layouts';
 
 export const metadata: Metadata = {
   title: {
@@ -31,7 +32,7 @@ export default function RootLayout({
           inter.className
         )}
       >
-        {children}
+        <HeaderLayout>{children}</HeaderLayout>
       </body>
     </html>
   );
