@@ -22,8 +22,9 @@
     --accent: #ffc700;
     --accent-foreground: #0f110c;
 
-    --muted: #3c5a64;
+    /* --muted: #3c5a64; */
     --muted-foreground: #fafafa;
+    --muted: #3c5a64da;
 
     --success: #00ff00;
     --success-foreground: #fafafa;
