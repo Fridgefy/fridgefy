@@ -5,6 +5,7 @@ import { buttonVariants } from '@/components/ui';
 import Image from 'next/image';
 import { cn } from '@/lib/tailwind/utils';
 import { Icons } from '@/components/icons/Icons';
+import { AuthButton } from './AuthButton';
 
 export function Header() {
   return (
@@ -36,16 +37,7 @@ export function Header() {
             )}
           </nav>
           <div>
-            <Link href={'/auth'}>
-              <div
-                className={buttonVariants({
-                  size: 'lg',
-                  variant: 'ghost',
-                })}
-              >
-                <Icons.user className="h-5 w-5" />
-              </div>
-            </Link>
+            <AuthButton />
           </div>
         </div>
       </div>
