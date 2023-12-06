@@ -1,0 +1,24 @@
+@keyframes rotateCW {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes rotateCWw {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+.rotateIconCW {
+  animation: rotateCW 20s linear infinite;
+}
+
+.rotateIconCounterCW {
+  animation: rotateCWw 20s linear infinite;
+}
