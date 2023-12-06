@@ -13,7 +13,7 @@ import React from "react";
 
 export const NavigationBanner = () => {
   return (
-    <div>
+    <div className="mt-40">
       <Card className="bg-muted text-muted-foreground bg-opacity-90 text-center px-14 py-6">
         <CardHeader>
           <CardTitle>Welcome to Fridgefy</CardTitle>

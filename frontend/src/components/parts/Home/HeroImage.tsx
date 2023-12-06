@@ -46,7 +46,9 @@ export default function HeroBackground() {
         {backgroundElements.map((svg, index) => (
           <div
             key={index}
-            className="w-12 h-12 flex justify-center items-center rotateIcon"
+            className={`w-12 h-12 flex justify-center items-center ${
+              index % 2 === 0 ? "rotateIconCW" : "rotateIconCounterCW"
+            }`}
           >
             <Image
               src={`/images/Hero/${svg}`}
