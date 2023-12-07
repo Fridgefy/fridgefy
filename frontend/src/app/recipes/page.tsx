@@ -1,5 +1,11 @@
-import { Button } from '@/components/ui';
+import { RecipePage } from "@/components/pages/RecipePage";
+
+import { Button } from "@/components/ui";
 
 export default function Recipe() {
-  return <div>Recipe page</div>;
+  return (
+    <div>
+      <RecipePage />
+    </div>
+  );
 }

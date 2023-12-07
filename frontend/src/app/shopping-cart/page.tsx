@@ -50,7 +50,7 @@ export default function ShoppingCart() {
 
               <div className="w-12 h-6">
                 <button className="flex items-center justify-center w-full h-full bg-accent border rounded-md p-1">
-                  <Icons.close className="w-4 h-4" />
+                  <Icons.cancel className="w-4 h-4" />
                 </button>
               </div>
             </div>
@@ -60,7 +60,7 @@ export default function ShoppingCart() {
 
               <div className="w-12 h-6">
                 <button className="flex items-center justify-center w-full h-full bg-accent border rounded-md p-1">
-                  <Icons.close className="w-4 h-4" />
+                  <Icons.cancel className="w-4 h-4" />
                 </button>
               </div>
             </div>
@@ -70,7 +70,7 @@ export default function ShoppingCart() {
 
               <div className="w-12 h-6">
                 <button className="flex items-center justify-center w-full h-full bg-accent border rounded-md p-1">
-                  <Icons.close className="w-4 h-4" />
+                  <Icons.cancel className="w-4 h-4" />
                 </button>
               </div>
             </div>
@@ -80,7 +80,7 @@ export default function ShoppingCart() {
 
               <div className="w-12 h-6">
                 <button className="flex items-center justify-center w-full h-full bg-accent border rounded-md p-1">
-                  <Icons.close className="w-4 h-4" />
+                  <Icons.cancel className="w-4 h-4" />
                 </button>
               </div>
             </div>
@@ -90,7 +90,7 @@ export default function ShoppingCart() {
 
               <div className="w-12 h-6">
                 <button className="flex items-center justify-center w-full h-full bg-accent border rounded-md p-1">
-                  <Icons.close className="w-4 h-4" />
+                  <Icons.cancel className="w-4 h-4" />
                 </button>
               </div>
             </div>
@@ -100,7 +100,7 @@ export default function ShoppingCart() {
 
               <div className="w-12 h-6">
                 <button className="flex items-center justify-center w-full h-full bg-accent border rounded-md p-1">
-                  <Icons.close className="w-4 h-4" />
+                  <Icons.cancel className="w-4 h-4" />
                 </button>
               </div>
             </div>
