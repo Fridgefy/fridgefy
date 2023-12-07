@@ -35,6 +35,28 @@
   font-size: 48;
   color: var(--accent-foreground);
 }
+.card-buttons-2 {
+  flex-shrink: 0;
+  border-radius: 10px;
+  border: 1px solid #0f110c;
+  box-shadow: 1px 2px 0px 0px #930;
+  font-weight: bolder;
+  color: var(--accent-foreground);
+}
+.card-buttons-3 {
+  border-radius: 10px;
+  border: 1px solid #0f110c;
+  box-shadow: 1px 2px 0px 0px #930;
+  color: var(--accent-foreground);
+}
 .image-radius {
   border-radius: 0.375rem 0.375rem 0rem 0rem;
+}
+.card-shadow {
+  box-shadow: 1px 2px 0px 0px #930;
+}
+
+.search-shadow {
+  box-shadow: 0px 1px 4.2px 2px var(--foreground);
+  border-radius: 0.375rem;
 }

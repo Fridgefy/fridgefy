@@ -1,17 +1,17 @@
 import { Button } from "@/components/ui/button";
+
 import "./Filters/filterStyling.css";
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
 import Image from "next/image";
 export default function RecipeCard() {
   return (
-    <Card className="bg-secondary">
+    <Card className="bg-secondary card-shadow">
       <Image
         src={"/images/placeholder.png"}
         alt={`Placeholder`}
