@@ -10,7 +10,7 @@
     --card: #fafafa;
     --card-foreground: #0f110c;
 
-    --popover: #fafafa;
+    --popover: rgba(255, 200, 0, 0.15);
     --popover-foreground: #0f110c;
 
     --primary: #993300;

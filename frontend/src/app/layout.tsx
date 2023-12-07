@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 import '@/styles/globals.css';
-import { inter } from '@/confg/fonts';
+import { inter, lato } from '@/confg/fonts';
 import { cn } from '@/lib/tailwind/utils';
 import { siteConfig } from '@/confg/site';
 import { HeaderLayout } from '@/components/layouts';
@@ -30,7 +30,7 @@ export default function RootLayout({
       <body
         className={cn(
           'min-h-screen bg-background font-sans antialiased',
-          inter.className
+          lato.className
         )}
       >
         <Providers>

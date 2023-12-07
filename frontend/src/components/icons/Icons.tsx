@@ -3,6 +3,7 @@ import {
   ShoppingCart,
   MenuSquare,
   User,
+  X,
   LogIn,
 } from 'lucide-react';
 
@@ -13,4 +14,5 @@ export const Icons = {
   recipe: MenuSquare,
   login: LogIn,
   user: User,
+  cancel: X,
 };
