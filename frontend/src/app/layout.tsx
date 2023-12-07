@@ -1,10 +1,10 @@
-import type { Metadata } from 'next';
+import type { Metadata } from "next";
 
-import '@/styles/globals.css';
-import { inter } from '@/confg/fonts';
-import { cn } from '@/lib/tailwind/utils';
-import { siteConfig } from '@/confg/site';
-import { HeaderLayout } from '@/components/layouts';
+import "@/styles/globals.css";
+import { inter, lato } from "@/confg/fonts";
+import { cn } from "@/lib/tailwind/utils";
+import { siteConfig } from "@/confg/site";
+import { HeaderLayout } from "@/components/layouts";
 
 export const metadata: Metadata = {
   title: {
@@ -13,9 +13,9 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   icons: {
-    icon: '/favicon.ico',
-    shortcut: '/favicon-16x16.png',
-    apple: '/apple-touch-icon.png',
+    icon: "/favicon.ico",
+    shortcut: "/favicon-16x16.png",
+    apple: "/apple-touch-icon.png",
   },
 };
 
@@ -28,8 +28,8 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={cn(
-          'min-h-screen bg-background font-sans antialiased',
-          inter.className
+          "min-h-screen bg-background font-sans antialiased",
+          lato.className
         )}
       >
         <HeaderLayout>{children}</HeaderLayout>
