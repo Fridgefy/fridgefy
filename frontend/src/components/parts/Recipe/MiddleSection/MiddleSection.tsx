@@ -1,13 +1,13 @@
-import React from 'react';
-import { CuisinesFilter } from './Filters/CuisinesFilter';
-import { IntolerancesFilter } from './Filters/IntolerancesFilter';
-import { IngredientsFilter } from './Filters/IngredientsFilter';
-import { DietsFilter } from './Filters/DietsFilter';
-import { RecipeNameFilter } from './Filters/RecipeNameFilter';
+import React from "react";
+import { CuisinesFilter } from "./Filters/CuisinesFilter";
+import { IntolerancesFilter } from "./Filters/IntolerancesFilter";
+import { IngredientsFilter } from "./Filters/IngredientsFilter";
+import { DietsFilter } from "./Filters/DietsFilter";
+import { RecipeNameFilter } from "./Filters/RecipeNameFilter";
 
-import { RecipeCardsDisplay } from './RecipeCardsDisplay/RecipeCardsDisplay';
-import { fetchRecipeData } from '@/api/recipe/data';
-import { SearchParamsType } from '../../../../../types/commonType';
+import { RecipeCardsDisplay } from "./RecipeCardsDisplay/RecipeCardsDisplay";
+import { fetchRecipeData } from "@/api/recipe/data";
+import { SearchParamsType } from "../../../../../types/commonType";
 
 type Props = {
   searchParams: SearchParamsType;
