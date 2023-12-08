@@ -5,6 +5,8 @@ import {
   User,
   X,
   LogIn,
+  Plus,
+  Trash2,
   Search,
 } from 'lucide-react';
 
@@ -15,6 +17,8 @@ export const Icons = {
   recipe: MenuSquare,
   login: LogIn,
   user: User,
+  plus: Plus,
+  trash: Trash2,
   cancel: X,
   search: Search,
 };
