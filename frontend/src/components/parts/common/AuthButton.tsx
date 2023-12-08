@@ -5,8 +5,6 @@ import { Button, buttonVariants } from '@/components/ui';
 import { Icons } from '@/components/icons/Icons';
 export const AuthButton = () => {
   const { data: session } = useSession();
-  console.log(session);
-
   if (session && session.user) {
     return (
       <Button variant={'ghost'} size={'lg'} onClick={() => signOut()}>

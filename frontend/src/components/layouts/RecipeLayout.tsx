@@ -1,6 +1,6 @@
-import LeftSidebar from "../parts/Recipe/LeftSidebar/LeftSidebar";
-import RightSidebar from "../parts/Recipe/RightSidebar/RightSidebar";
-import MiddleSection from "../parts/Recipe/MiddleSection/MiddleSection";
+import LeftSidebar from '../parts/Recipe/LeftSidebar/LeftSidebar';
+import RightSidebar from '../parts/Recipe/RightSidebar/RightSidebar';
+import { MiddleSection } from '../parts/Recipe/MiddleSection/MiddleSection';
 // type Props = {
 //   children: React.ReactNode;
 // };
