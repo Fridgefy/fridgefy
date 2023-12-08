@@ -1,4 +1,5 @@
 export type SearchParamsType = {
+  query?: string;
   cuisine?: string;
   diet?: string;
   intolerances?: string;
