@@ -1,11 +1,7 @@
 import LeftSidebar from "../parts/Recipe/LeftSidebar/LeftSidebar";
 import RightSidebar from "../parts/Recipe/RightSidebar/RightSidebar";
 import MiddleSection from "../parts/Recipe/MiddleSection/MiddleSection";
-// type Props = {
-//   children: React.ReactNode;
-// };
 
-// export const RecipeLayout: React.FC<Props> = ({ children }) => {
 export const RecipeLayout = () => {
   return (
     <div className="flex h-screen">
