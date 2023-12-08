@@ -1,3 +1,7 @@
+'use client';
+
+import { usePathname, useSearchParams, useRouter } from 'next/navigation';
+
 import React from 'react';
 import './filterStyling.css';
 import Image from 'next/image';
@@ -9,7 +13,21 @@ const cuisines: string[] = [
   'Italian',
   'French',
 ];
+type Cuisine = (typeof cuisines)[number];
 export function CuisinesFilter() {
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const { replace } = useRouter();
+
+  const handleSelectCuisine = (cuisine: Cuisine) => {
+    const params = new URLSearchParams(searchParams);
+    if (cuisine) {
+      params.set('cuisine', cuisine);
+    } else {
+      params.delete('cuisine');
+    }
+    replace(`${pathname}?${params.toString()}`);
+  };
   return (
     <div>
       <div>
@@ -20,6 +38,7 @@ export function CuisinesFilter() {
           <div
             key={index}
             className="flex flex-col items-center hover:cursor-pointer"
+            onClick={() => handleSelectCuisine(cuisines)}
           >
             <Image
               src={`/images/Filter/${cuisines}.png`}
