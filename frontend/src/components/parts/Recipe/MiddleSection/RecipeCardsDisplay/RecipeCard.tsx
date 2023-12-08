@@ -1,20 +1,26 @@
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 
-import "./Filters/filterStyling.css";
+import './recipeCardStyling.css';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import Image from "next/image";
-export default function RecipeCard() {
+} from '@/components/ui/card';
+import Image from 'next/image';
+import { Recipe } from '../../../../../../types/models';
+
+type Props = {
+  recipe: Recipe;
+};
+
+export function RecipeCard({ recipe }: Props) {
   return (
     <Card className="bg-secondary card-shadow">
       <Image
-        src={"/images/placeholder.png"}
-        alt={`Placeholder`}
+        src={recipe.image}
+        alt={`Icon ${recipe.id}`}
         width={50}
         height={50}
         layout="responsive"
@@ -22,7 +28,7 @@ export default function RecipeCard() {
       />
 
       <CardHeader>
-        <CardTitle className="text-lg">Recipe Name Here</CardTitle>
+        <CardTitle className="text-lg">{recipe.title}</CardTitle>
       </CardHeader>
       <CardContent className="flex justify-between">
         <Button className="card-buttons bg-background">More</Button>
