@@ -1,7 +1,25 @@
+'use client';
+
+import { usePathname, useSearchParams, useRouter } from 'next/navigation';
+
 import './filterStyling.css';
 import Image from 'next/image';
 const intolerance: string[] = ['Dairy', 'Egg', 'Peanut'];
+type Intolerance = (typeof intolerance)[number];
 export function IntolerancesFilter() {
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const { replace } = useRouter();
+
+  const handleSelectIntolerance = (Intolerance: Intolerance) => {
+    const params = new URLSearchParams(searchParams);
+    if (Intolerance) {
+      params.set('Intolerance', Intolerance);
+    } else {
+      params.delete('Intolerance');
+    }
+    replace(`${pathname}?${params.toString()}`);
+  };
   return (
     <>
       <h1 className="intolerance-title mb-3">Intolerances</h1>
@@ -10,6 +28,7 @@ export function IntolerancesFilter() {
           <div
             key={index}
             className="flex flex-col items-center hover:cursor-pointer"
+            onClick={() => handleSelectIntolerance(intolerance)}
           >
             <Image
               src={`/images/Filter/${intolerance}.png`}
