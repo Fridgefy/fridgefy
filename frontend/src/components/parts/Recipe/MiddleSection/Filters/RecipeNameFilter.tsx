@@ -1,10 +1,10 @@
 'use client';
 
 import { usePathname, useSearchParams, useRouter } from 'next/navigation';
+import { useDebouncedCallback } from 'use-debounce';
 
 import { Icons } from '@/components/icons/Icons';
 import React from 'react';
-import { useDebouncedCallback } from 'use-debounce';
 
 export function RecipeNameFilter() {
   const searchParams = useSearchParams();
