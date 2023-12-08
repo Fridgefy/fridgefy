@@ -1,15 +1,15 @@
-import React from "react";
-import "./filterStyling.css";
-import Image from "next/image";
+import React from 'react';
+import './filterStyling.css';
+import Image from 'next/image';
 const cuisines: string[] = [
-  "Japanese",
-  "Mexican",
-  "Chinese",
-  "Greek",
-  "Italian",
-  "French",
+  'Japanese',
+  'Mexican',
+  'Chinese',
+  'Greek',
+  'Italian',
+  'French',
 ];
-export default function Cuisines() {
+export function CuisinesFilter() {
   return (
     <div>
       <div>

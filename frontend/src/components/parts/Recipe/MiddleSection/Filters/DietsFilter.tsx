@@ -1,7 +1,7 @@
-import "./filterStyling.css";
-import Image from "next/image";
-const diets: string[] = ["Gluten", "Vegan", "Keto"];
-export default function Diets() {
+import './filterStyling.css';
+import Image from 'next/image';
+const diets: string[] = ['Gluten', 'Vegan', 'Keto'];
+export function DietsFilter() {
   return (
     <>
       <h1 className="intolerance-title mb-3">Diets</h1>

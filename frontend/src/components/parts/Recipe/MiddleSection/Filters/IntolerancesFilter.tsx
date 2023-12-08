@@ -1,7 +1,7 @@
-import "./filterStyling.css";
-import Image from "next/image";
-const intolerance: string[] = ["Dairy", "Egg", "Peanut"];
-export default function Intolerances() {
+import './filterStyling.css';
+import Image from 'next/image';
+const intolerance: string[] = ['Dairy', 'Egg', 'Peanut'];
+export function IntolerancesFilter() {
   return (
     <>
       <h1 className="intolerance-title mb-3">Intolerances</h1>
