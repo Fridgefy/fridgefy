@@ -1,6 +1,5 @@
 //RecipePage.tsx
 import { SearchParamsType } from '../../../types/commonType';
-import { RecipeLayout } from '../layouts/RecipeLayout';
 import LeftSidebar from '../parts/Recipe/LeftSidebar/LeftSidebar';
 import { MiddleSection } from '../parts/Recipe/MiddleSection/MiddleSection';
 import RightSidebar from '../parts/Recipe/RightSidebar/RightSidebar';

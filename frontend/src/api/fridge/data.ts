@@ -1,3 +1,4 @@
+'use server';
 import { Fridge } from '../../../types/entities/fridge.entity';
 import { apiPath } from '../route';
 
