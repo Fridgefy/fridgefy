@@ -8,7 +8,13 @@ export const FridgeItemsDisplay = async () => {
   const session = await getServerSession(authOptions);
   console.log(session);
 
-  // const ingredients = session  await fetchFridgeData(session.user.email);
+  const data =
+    session &&
+    session.user &&
+    session.user.email &&
+    (await fetchFridgeData(session.user.email));
+
+  const ingredients = data && data.ingredients;
 
   // const { data: session } = useSession();
 
@@ -24,9 +30,10 @@ export const FridgeItemsDisplay = async () => {
 
   return (
     <ul>
-      {/* {ingredients.map((ingredient, index) => (
-        <FridgeItem ingredient={ingredient} key={index} />
-      ))} */}
+      {ingredients &&
+        ingredients.map((ingredient, index) => (
+          <FridgeItem ingredient={ingredient} key={index} />
+        ))}
     </ul>
   );
 };
