@@ -105,3 +105,10 @@ export const sampleRecipes: Recipe[] = [
     ingredients: [],
   },
 ];
+
+/* My Recipe */
+export type MyRecipe = {
+  id: number
+  userEmail: string
+  recipeIds: number[]
+};
