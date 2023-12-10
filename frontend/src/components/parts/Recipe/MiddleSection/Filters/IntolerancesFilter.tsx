@@ -8,24 +8,30 @@ import { useState } from "react";
 const intolerance: string[] = ["Dairy", "Egg", "Peanut"];
 type Intolerance = (typeof intolerance)[number];
 export function IntolerancesFilter() {
-  const [selectedIntolerances, setSelectedIntolerances] = useState<
-    string | null
-  >(null);
+  const [selectedIntolerances, setSelectedIntolerances] = useState<string[]>(
+    []
+  );
 
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
 
-  const handleSelectIntolerance = (Intolerance: Intolerance) => {
-    setSelectedIntolerances(Intolerance);
+  const handleSelectIntolerance = (intolerance: Intolerance) => {
+    const newSelectedIntolerances = selectedIntolerances.includes(intolerance)
+      ? selectedIntolerances.filter((i) => i !== intolerance)
+      : [...selectedIntolerances, intolerance];
+
     const params = new URLSearchParams(searchParams);
-    if (Intolerance) {
-      params.set("Intolerance", Intolerance);
+    if (newSelectedIntolerances.length > 0) {
+      params.set("intolerances", newSelectedIntolerances.join(","));
     } else {
-      params.delete("Intolerance");
+      params.delete("intolerances");
     }
     replace(`${pathname}?${params.toString()}`);
+
+    setSelectedIntolerances(newSelectedIntolerances);
   };
+
   return (
     <>
       <h1 className="intolerance-title mb-3">Intolerances</h1>
@@ -34,7 +40,7 @@ export function IntolerancesFilter() {
           <div
             key={index}
             className={`flex flex-col items-center hover:cursor-pointer ${
-              selectedIntolerances === intolerance
+              selectedIntolerances.includes(intolerance)
                 ? "bg-accent p-1 border-2 border-black-500 rounded-lg shadow-lg"
                 : "bg-transparent border-2 border-transparent"
             }`}
