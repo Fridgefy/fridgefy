@@ -1,6 +1,6 @@
-import React from 'react';
-import { Recipe } from '../../../../../../types/models';
-import { RecipeCard } from './RecipeCard';
+import React from "react";
+import { Recipe } from "../../../../../../types/models";
+import { RecipeCard } from "./RecipeCard";
 
 type Props = {
   recipes: Recipe[];

@@ -1,6 +1,6 @@
-import { SearchParamsType } from '../../../types/commonType';
-import { Recipe } from '../../../types/models';
-import { apiPath, baseUrl } from '../route';
+import { SearchParamsType } from "../../../types/commonType";
+import { Recipe } from "../../../types/models";
+import { apiPath, baseUrl } from "../route";
 
 export const fetchRecipeData = async (
   searchParams: SearchParamsType
