@@ -108,7 +108,7 @@ export const sampleRecipes: Recipe[] = [
 
 /* My Recipe */
 export type MyRecipe = {
-  id: number
+  id: string
   userEmail: string
   recipeIds: number[]
 };

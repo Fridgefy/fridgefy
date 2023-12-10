@@ -1,42 +1,5 @@
 {
-  "my-recipes": [
-    {
-      "id": 1,
-      "userEmail": "example@example.com",
-      "recipeIds": [
-        1,
-        2,
-        3,
-        4
-      ]
-    },
-    {
-      "id": 2,
-      "userEmail": "example1@example.com",
-      "recipeIds": [
-        1,
-        2,
-        3,
-        4
-      ]
-    },
-    {
-      "userEmail": "example2@example.com",
-      "recipeIds": [
-        1,
-        2,
-        3
-      ],
-      "id": 3
-    },
-    {
-      "userEmail": "example3@example.com",
-      "recipeIds": [
-        1
-      ],
-      "id": 4
-    }
-  ],
+  "my-recipes": [],
   "recipes": [
     {
       "vegetarian": true,
