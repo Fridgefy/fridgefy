@@ -102,7 +102,10 @@ const tempRecipes = [
   },
 ];
 
-export default function ShoppingCart() {
+export default function ShoppingListPage() {
+
+  // TODO: Get ingredients from MyRecipeDetails, group by name
+
   const [fridgeItems, setFridgeItems] = useState<typeof tmpItems[number][]>(tmpItems);
   const [ingredients, setIngredients] = useState<typeof tmpBuyItems[number][]>(tmpBuyItems);
   const [recipes, setRecipes] = useState<typeof tempRecipes[number][]>(tempRecipes);
