@@ -1,22 +1,28 @@
-'use client';
+"use client";
 
-import { usePathname, useSearchParams, useRouter } from 'next/navigation';
+import { usePathname, useSearchParams, useRouter } from "next/navigation";
 
-import './filterStyling.css';
-import Image from 'next/image';
-const intolerance: string[] = ['Dairy', 'Egg', 'Peanut'];
+import "./filterStyling.css";
+import Image from "next/image";
+import { useState } from "react";
+const intolerance: string[] = ["Dairy", "Egg", "Peanut"];
 type Intolerance = (typeof intolerance)[number];
 export function IntolerancesFilter() {
+  const [selectedIntolerances, setSelectedIntolerances] = useState<
+    string | null
+  >(null);
+
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
 
   const handleSelectIntolerance = (Intolerance: Intolerance) => {
+    setSelectedIntolerances(Intolerance);
     const params = new URLSearchParams(searchParams);
     if (Intolerance) {
-      params.set('Intolerance', Intolerance);
+      params.set("Intolerance", Intolerance);
     } else {
-      params.delete('Intolerance');
+      params.delete("Intolerance");
     }
     replace(`${pathname}?${params.toString()}`);
   };
@@ -27,7 +33,11 @@ export function IntolerancesFilter() {
         {intolerance.map((intolerance, index) => (
           <div
             key={index}
-            className="flex flex-col items-center hover:cursor-pointer"
+            className={`flex flex-col items-center hover:cursor-pointer ${
+              selectedIntolerances === intolerance
+                ? "bg-accent p-1 border-2 border-black-500 rounded-lg shadow-lg"
+                : "bg-transparent border-2 border-transparent"
+            }`}
             onClick={() => handleSelectIntolerance(intolerance)}
           >
             <Image

@@ -1,21 +1,25 @@
-'use client';
+"use client";
 
-import { usePathname, useSearchParams, useRouter } from 'next/navigation';
-import './filterStyling.css';
-import Image from 'next/image';
-const diets: string[] = ['Gluten', 'Vegan', 'Keto'] as const;
+import { usePathname, useSearchParams, useRouter } from "next/navigation";
+import "./filterStyling.css";
+import Image from "next/image";
+import { useState } from "react";
+const diets: string[] = ["Gluten", "Vegan", "Keto"];
 type Diet = (typeof diets)[number];
 export function DietsFilter() {
+  const [selectedDiet, setSelectedDiet] = useState<string | null>(null);
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
 
   const handleSelectDiet = (diet: Diet) => {
+    setSelectedDiet(diet);
+
     const params = new URLSearchParams(searchParams);
     if (diet) {
-      params.set('diets', diet);
+      params.set("diets", diet);
     } else {
-      params.delete('diets');
+      params.delete("diets");
     }
     replace(`${pathname}?${params.toString()}`);
   };
@@ -26,7 +30,11 @@ export function DietsFilter() {
         {diets.map((diet, index) => (
           <div
             key={index}
-            className="flex flex-col items-center hover:cursor-pointer"
+            className={`flex flex-col items-center hover:cursor-pointer ${
+              selectedDiet === diet
+                ? "bg-accent p-1 border-2 border-black-500 rounded-lg shadow-lg"
+                : "bg-transparent border-2 border-transparent"
+            }`}
             onClick={() => handleSelectDiet(diet)}
           >
             <Image
