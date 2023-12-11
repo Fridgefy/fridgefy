@@ -1,18 +1,14 @@
-"use client";
+'use client';
 
-import { usePathname, useSearchParams, useRouter } from "next/navigation";
+import { usePathname, useSearchParams, useRouter } from 'next/navigation';
 
-import "./filterStyling.css";
-import Image from "next/image";
-import { useState } from "react";
-const intolerance: string[] = ["Dairy", "Egg", "Peanut"];
+import './filterStyling.css';
+import Image from 'next/image';
+import { useState } from 'react';
+const intolerance: string[] = ['Dairy', 'Egg', 'Peanut'];
 type Intolerance = (typeof intolerance)[number];
-type IntolerancesFilterProps = {
-  onIntoleranceChange: (selectedIntolerances: string[]) => void;
-};
-export function IntolerancesFilter({
-  onIntoleranceChange,
-}: IntolerancesFilterProps) {
+
+export function IntolerancesFilter() {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
@@ -22,15 +18,18 @@ export function IntolerancesFilter({
 
   const handleSelectIntolerance = (intolerance: Intolerance) => {
     const newSelectedIntolerances = selectedIntolerances.includes(intolerance)
-      ? selectedIntolerances.filter((i) => i === intolerance)
+      ? selectedIntolerances.filter((i) => i !== intolerance)
       : [...selectedIntolerances, intolerance];
     setSelectedIntolerances(newSelectedIntolerances);
-    onIntoleranceChange(newSelectedIntolerances);
     const params = new URLSearchParams(searchParams);
     if (newSelectedIntolerances.length > 0) {
-      params.set("intolerances", newSelectedIntolerances.join(","));
+      if (newSelectedIntolerances.length > 1) {
+        params.set('intolerances', newSelectedIntolerances.join(','));
+      } else {
+        params.set('intolerances', newSelectedIntolerances[0]);
+      }
     } else {
-      params.delete("intolerances");
+      params.delete('intolerances');
     }
     replace(`${pathname}?${params.toString()}`);
   };
@@ -44,8 +43,8 @@ export function IntolerancesFilter({
             key={index}
             className={`flex flex-col items-center hover:cursor-pointer ${
               selectedIntolerances.includes(intolerance)
-                ? "bg-accent p-1 border-2 border-black-500 rounded-lg shadow-lg"
-                : "bg-transparent border-2 border-transparent"
+                ? 'bg-accent p-1 border-2 border-black-500 rounded-lg shadow-lg'
+                : 'bg-transparent border-2 border-transparent'
             }`}
             onClick={() => handleSelectIntolerance(intolerance)}
           >

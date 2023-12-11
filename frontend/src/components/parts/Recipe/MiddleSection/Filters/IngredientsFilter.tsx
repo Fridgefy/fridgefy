@@ -41,13 +41,6 @@ export function IngredientsFilter() {
           </label>
         </div>
       </div>
-      <div>
-        <ul className="grid grid-cols-3 justify-items-center mt-4">
-          <li>Chicken</li>
-          <li>Butter</li>
-          <li>Apple</li>
-        </ul>
-      </div>
     </div>
   );
 }

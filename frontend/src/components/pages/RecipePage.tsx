@@ -6,14 +6,14 @@ import RightSidebar from '../parts/Recipe/RightSidebar/RightSidebar';
 type Props = {
   searchParams: SearchParamsType;
 };
-export const RecipePage = ({ searchParams }: Props) => {
+export const RecipePage = async ({ searchParams }: Props) => {
   return (
     <div className="flex h-screen">
       <div className="w-1/4 p-4 bg-popover border-r">
         <LeftSidebar />
       </div>
       <div className="flex-grow">
-        <MiddleSection />
+        <MiddleSection searchParams={searchParams} />
       </div>
       <div className="w-1/4 p-4 bg-popover border-l">
         <RightSidebar />
