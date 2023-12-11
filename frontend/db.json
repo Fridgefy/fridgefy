@@ -1,9 +1,9 @@
 {
   "fridge": [
     {
-      "id": 1,
-      "userEmail": "sample@gmail.com",
-      "ingredients": []
+      "ingredients": [],
+      "userEmail": "kan0712livepool@gmail.com",
+      "id": "84925cf1-8041-47f7-bf73-9c9d80398b85"
     }
   ]
 }

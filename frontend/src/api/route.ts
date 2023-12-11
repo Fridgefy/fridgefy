@@ -11,6 +11,7 @@ const baseURLParams = `?apiKey=${apiKey}`;
 
 export const apiPath = {
   getRecipe: recipeBaseURL + 'complexSearch' + baseURLParams,
+  createNewFridge: jsonServerBaseURL + fridge,
   getItemsFromFridge: jsonServerBaseURL + fridge,
-  postItemToFridge: jsonServerBaseURL + fridge,
+  updateFridge: jsonServerBaseURL + fridge,
 };
