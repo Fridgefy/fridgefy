@@ -4,7 +4,7 @@ import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import "./filterStyling.css";
 import Image from "next/image";
 import { useState } from "react";
-const diets: string[] = ["Gluten Free", "Primal", "Ketogenic"];
+const diets: string[] = ["Gluten Free", "Vegan", "Ketogenic"];
 type Diet = (typeof diets)[number];
 export function DietsFilter() {
   const searchParams = useSearchParams();

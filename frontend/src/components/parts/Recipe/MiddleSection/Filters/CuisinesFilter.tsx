@@ -13,19 +13,22 @@ const cuisines: string[] = [
   "Italian",
   "French",
 ];
+type CuisinesFilterProps = {
+  onCuisineChange: (selectedCuisines: string[]) => void;
+};
 type Cuisine = (typeof cuisines)[number];
-export function CuisinesFilter() {
+export function CuisinesFilter({ onCuisineChange }: CuisinesFilterProps) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
   const [selectedCuisines, setSelectedCuisines] = useState<string[]>([]);
-
   const handleSelectCuisine = (cuisine: Cuisine) => {
     const newSelectedCuisines = selectedCuisines.includes(cuisine)
       ? selectedCuisines.filter((c) => c !== cuisine)
       : [...selectedCuisines, cuisine];
 
     setSelectedCuisines(newSelectedCuisines);
+    onCuisineChange(newSelectedCuisines);
     const params = new URLSearchParams(searchParams);
 
     if (newSelectedCuisines.length > 0) {

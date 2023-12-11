@@ -3,7 +3,7 @@ import { Recipe } from "../../../types/models";
 import { apiPath, baseUrl } from "../route";
 
 export const fetchRecipeData = async (
-  searchParams: SearchParamsType
+  searchParams: SearchParamsType = {}
 ): Promise<Recipe[] | undefined> => {
   let path = apiPath.getRecipe;
   const searchParamsKeys = Object.keys(searchParams);
