@@ -1,41 +1,8 @@
-import React from "react";
-import { Button } from "@/components/ui/button";
-import "../MiddleSection/Filters/filterStyling.css";
+import React, { Suspense } from 'react';
+import './leftSidebarStyling.css';
+import { FridgeSearchBar } from './FridgeSearhBar';
 
-function SearchBar() {
-  return (
-    <div className="w-full">
-      <label className="relative ">
-        <span className="sr-only">Search</span>
-        <span className="absolute inset-y-0 left-0 flex items-center pl-2">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="absolute top-0 bottom-0 w-6 h-6 my-auto text-gray-500 left-3"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-            />
-          </svg>
-        </span>
-        <Button className="card-buttons-2 bg-accent absolute top-0 bottom-0 w-6 h-6 my-auto right-3">
-          <span className="text-xl font-black">+</span>
-        </Button>
-        <input
-          className="placeholder-italic placeholder-text-slate-400  bg-white w-full border border-slate-300 rounded-md py-2 pl-9 pr-3 search-shadow  focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm"
-          placeholder="Add to Fridge..."
-          type="text"
-          name="search"
-        />
-      </label>
-    </div>
-  );
-}
+import { FridgeItemsDisplay } from './FridgeItemsDisplay/FridgeItemsDisplay';
 
 export default function LeftSidebar() {
   return (
@@ -45,51 +12,12 @@ export default function LeftSidebar() {
           My Fridge
         </h1>
         <div className="mt-6">
-          <SearchBar />
+          <FridgeSearchBar />
         </div>
         <div className="w-full p-6">
-          <ul>
-            <div className="border-b relative w-full mt-4 search-shadow">
-              <li className="flex items-center justify-between py-2">
-                <span className="pl-4">Item-1</span>
-                <Button className="card-buttons-2 bg-accent absolute top-0 bottom-0 w-6 h-6 my-auto right-3">
-                  <span className="text-xl font-black rotate-45">+</span>
-                </Button>
-              </li>
-            </div>
-            <div className="border-b relative w-full mt-4  search-shadow">
-              <li className="flex items-center justify-between py-2">
-                <span className="pl-4">Item-1</span>
-                <Button className="card-buttons-2 bg-accent absolute top-0 bottom-0 w-6 h-6 my-auto right-3">
-                  <span className="text-xl font-black rotate-45">+</span>
-                </Button>
-              </li>
-            </div>
-            <div className="border-b relative w-full mt-4 search-shadow">
-              <li className="flex items-center justify-between py-2">
-                <span className="pl-4">Item-1</span>
-                <Button className="card-buttons-2 bg-accent absolute top-0 bottom-0 w-6 h-6 my-auto right-3">
-                  <span className="text-xl font-black rotate-45">+</span>
-                </Button>
-              </li>
-            </div>
-            <div className="border-b relative w-full mt-4 search-shadow">
-              <li className="flex items-center justify-between py-2">
-                <span className="pl-4">Item-1</span>
-                <Button className="card-buttons-2 bg-accent absolute top-0 bottom-0 w-6 h-6 my-auto right-3">
-                  <span className="text-xl font-black rotate-45">+</span>
-                </Button>
-              </li>
-            </div>
-            <div className="border-b relative w-full mt-4 search-shadow">
-              <li className="flex items-center justify-between py-2">
-                <span className="pl-4">Item-1</span>
-                <Button className="card-buttons-2 bg-accent absolute top-0 bottom-0 w-6 h-6 my-auto right-3">
-                  <span className="text-xl font-black rotate-45">+</span>
-                </Button>
-              </li>
-            </div>
-          </ul>
+          <Suspense fallback={<p>Loading...</p>}>
+            <FridgeItemsDisplay />
+          </Suspense>
         </div>
       </div>
     </div>
