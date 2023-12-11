@@ -6,6 +6,7 @@ import SideBarListItem from "@/components/parts/SideBar/SideBarListItem";
 import SideBarInput from "@/components/parts/SideBar/SideBarInput";
 import RecipeAccordion from "@/components/parts/ShoppingList/RecipeAccordion";
 import SideBarTitle from "@/components/parts/SideBar/SideBarTitle";
+import { RecipeDetail } from "../../../types/api";
 
 const tmpItems = [
   { name: "item-1" },
@@ -102,7 +103,12 @@ const tempRecipes = [
   },
 ];
 
-export default function ShoppingListPage() {
+type Props = {
+  myRecipeDetails: RecipeDetail[]
+};
+
+export default function ShoppingListPage({ myRecipeDetails }: Props) {
+  console.log(myRecipeDetails);
 
   // TODO: Get ingredients from MyRecipeDetails, group by name
 
@@ -134,6 +140,8 @@ export default function ShoppingListPage() {
 
   // TODO: temporary workaround
   const removeRecipe = (id: number) => {
+    // TODO: removeById from the record
+
     setRecipes(recipes.filter(recipe => recipe.id !== id));
     // TODO: remove ingredients that belongs to the recipe(should be related with id?)
   };
@@ -165,11 +173,11 @@ export default function ShoppingListPage() {
       {/* main contents */}
       <div className="w-1/2 px-8 py-12 overflow-y-auto">
         <div className="w-full flex flex-col items-center justify-center gap-4">
-          {recipes.map(recipe =>
+          {myRecipeDetails.map(recipe =>
             <RecipeAccordion
-              key={recipe.name}
-              title={recipe.name}
-              description={recipe.description}
+              key={recipe.id}
+              title={recipe.title}
+              description={recipe.summary}
               imageUrl={recipe.image}
               handleDelete={() => removeRecipe(recipe.id)}
             />

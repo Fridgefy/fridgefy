@@ -1,9 +1,9 @@
-import { v4 as uuidv4 } from "uuid";
 import { apiPath } from "../route";
 import { MyRecipe } from "../../../types/models";
 import { RecipeDetail } from "../../../types/api";
 
 const port = 3005;
+const apiKey = process.env.SPOONACULAR_API_KEY;
 const jsonServerBaseUrl = `http://localhost:${port}/`;
 
 const handleError = (res: Response, message: string = "") => {
@@ -16,7 +16,7 @@ const handleError = (res: Response, message: string = "") => {
  * @param {string} userEmail
  * @return {Promise<MyRecipe>}
  */
-const fetchMyRecipeByEmail = async (userEmail: string): Promise<MyRecipe | null> => {
+export const fetchMyRecipeByEmail = async (userEmail: string): Promise<MyRecipe | null> => {
   const endpoint = `${jsonServerBaseUrl}my-recipes?userEmail=${userEmail}`;
 
   try {
@@ -36,7 +36,7 @@ const fetchMyRecipeByEmail = async (userEmail: string): Promise<MyRecipe | null>
   }
 };
 
-const fetchMyRecipeById = async (id: string): Promise<MyRecipe> => {
+const fetchMyRecipeById = async (id: number): Promise<MyRecipe> => {
   const endpoint = `${jsonServerBaseUrl}my-recipes/${id}`;
 
   try {
@@ -50,7 +50,7 @@ const fetchMyRecipeById = async (id: string): Promise<MyRecipe> => {
   }
 };
 
-const addMyRecipe = async ({ id, recipeId }: { id: string; recipeId: number; }): Promise<MyRecipe> => {
+const addMyRecipe = async ({ id, recipeId }: { id: number; recipeId: number; }): Promise<MyRecipe> => {
   const endpoint = `${jsonServerBaseUrl}my-recipes/${id}`;
 
   try {
@@ -74,22 +74,25 @@ const addMyRecipe = async ({ id, recipeId }: { id: string; recipeId: number; }):
 const createMyRecipeRecord = async ({ userEmail, recipeId }: { userEmail: string; recipeId: number; }): Promise<MyRecipe> => {
   const endpoint = `${jsonServerBaseUrl}my-recipes`;
 
-  const reqBody: MyRecipe = {
-    id: uuidv4(),
+  const reqBody: Omit<MyRecipe, "id"> = {
     userEmail,
     recipeIds: [recipeId],
   };
 
-  const res = await fetch(endpoint, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(reqBody),
-  });
-  handleError(res, "Failed to create a record");
+  try {
+    const res = await fetch(endpoint, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(reqBody),
+    });
+    handleError(res, "Failed to create a record");
 
-  return res.json();
+    return res.json();
+  } catch (error) {
+    throw error;
+  }
 };
 
 const createMyRecipe = async ({ userEmail, recipeId }: { userEmail: string; recipeId: number; }): Promise<MyRecipe> => {
@@ -97,7 +100,7 @@ const createMyRecipe = async ({ userEmail, recipeId }: { userEmail: string; reci
     const myRecipe = await fetchMyRecipeByEmail(userEmail);
 
     return myRecipe === null
-      ? await createMyRecipe({ userEmail, recipeId })
+      ? await createMyRecipeRecord({ userEmail, recipeId })
       : await addMyRecipe({ id: myRecipe.id, recipeId });
   } catch (error) {
     console.error(error);
@@ -106,7 +109,7 @@ const createMyRecipe = async ({ userEmail, recipeId }: { userEmail: string; reci
 };
 
 
-const removeMyRecipeById = async ({ id, recipeId }: { id: string; recipeId: number; }): Promise<MyRecipe> => {
+const removeMyRecipeById = async ({ id, recipeId }: { id: number; recipeId: number; }): Promise<MyRecipe> => {
   const endpoint = `${jsonServerBaseUrl}my-recipes/${id}`;
 
   try {
@@ -134,13 +137,14 @@ const removeMyRecipeById = async ({ id, recipeId }: { id: string; recipeId: numb
 };
 
 // Get details by IDs(bulk)
-const fetchMyRecipeByEmailDetails = async (recipeIds: number[]): Promise<RecipeDetail[]> => {
-  //  https://api.spoonacular.com/recipes/informationBulk?ids=715538,716429
-  const endpoint = `${apiPath.getRecipeDetails}?${recipeIds.join(',')}`
+export const fetchMyRecipeDetails = async (recipeIds: number[]): Promise<RecipeDetail[]> => {
+  // https://api.spoonacular.com/recipes/informationBulk?ids=715538,716429
+  const endpoint = `${apiPath.getRecipeDetails}&ids=${recipeIds.join(',')}`
+  console.log('endpoint:', endpoint);
 
   try {
     const res = await fetch(endpoint, { next: { tags: ["recipeDetails"] } });
-    handleError(res, "Failed to recipe details");
+    handleError(res, "Failed to fetch recipe details");
 
     return res.json();
   } catch (error) {

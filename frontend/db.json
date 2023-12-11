@@ -1,10 +1,29 @@
 {
-  "my-recipes": [],
   "fridge": [
     {
       "userEmail": "kan0712livepool@gmail.com",
       "ingredients": [],
       "id": 1
+    },
+    {
+      "userEmail": "aoyama.ko0920@gmail.com",
+      "ingredients": [
+        "bow tie pasta",
+        "butter"
+      ],
+      "id": 2
     }
-  ]
+  ],
+  "my-recipes": [
+    {
+      "userEmail": "aoyama.ko0920@gmail.com",
+      "recipeIds": [
+        715538,
+        716429,
+        716406
+      ],
+      "id": 1
+    }
+  ],
+  "ingredients-to-buy": []
 }

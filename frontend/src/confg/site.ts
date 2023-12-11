@@ -15,7 +15,7 @@ export const siteConfig = {
     },
     {
       title: 'Shopping Cart',
-      href: '/shopping-cart',
+      href: '/shopping-list',
     },
   ],
 };

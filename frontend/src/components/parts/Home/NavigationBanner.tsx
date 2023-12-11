@@ -24,7 +24,7 @@ export const NavigationBanner = () => {
         </CardHeader>
         <CardContent className="flex flex-col gap-3">
           <div>
-            <Link href={"/shopping-cart"}>
+            <Link href={"/shopping-list"}>
               <div
                 className={buttonVariants({
                   size: "lg",
