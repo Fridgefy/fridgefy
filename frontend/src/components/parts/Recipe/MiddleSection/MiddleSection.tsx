@@ -27,6 +27,10 @@ export function MiddleSection() {
       cuisine: Array.isArray(newParams.cuisine)
         ? newParams.cuisine.join(",")
         : newParams.cuisine,
+
+      intolerances: Array.isArray(newParams.intolerances)
+        ? newParams.intolerances.join(",")
+        : newParams.intolerances,
     }));
   };
   useEffect(() => {
@@ -56,7 +60,11 @@ export function MiddleSection() {
       </div>
       <div className="filter-container border-b ">
         <div>
-          <IntolerancesFilter />
+          <IntolerancesFilter
+            onIntoleranceChange={(selectedIntolerances) =>
+              updateSearchParams({ intolerances: selectedIntolerances })
+            }
+          />
         </div>
         <IngredientsFilter />
         <div>

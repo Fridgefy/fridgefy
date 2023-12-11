@@ -22,6 +22,7 @@ export function CuisinesFilter({ onCuisineChange }: CuisinesFilterProps) {
   const pathname = usePathname();
   const { replace } = useRouter();
   const [selectedCuisines, setSelectedCuisines] = useState<string[]>([]);
+
   const handleSelectCuisine = (cuisine: Cuisine) => {
     const newSelectedCuisines = selectedCuisines.includes(cuisine)
       ? selectedCuisines.filter((c) => c !== cuisine)

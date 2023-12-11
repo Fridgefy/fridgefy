@@ -7,20 +7,25 @@ import Image from "next/image";
 import { useState } from "react";
 const intolerance: string[] = ["Dairy", "Egg", "Peanut"];
 type Intolerance = (typeof intolerance)[number];
-export function IntolerancesFilter() {
+type IntolerancesFilterProps = {
+  onIntoleranceChange: (selectedIntolerances: string[]) => void;
+};
+export function IntolerancesFilter({
+  onIntoleranceChange,
+}: IntolerancesFilterProps) {
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const { replace } = useRouter();
   const [selectedIntolerances, setSelectedIntolerances] = useState<string[]>(
     []
   );
 
-  const searchParams = useSearchParams();
-  const pathname = usePathname();
-  const { replace } = useRouter();
-
   const handleSelectIntolerance = (intolerance: Intolerance) => {
     const newSelectedIntolerances = selectedIntolerances.includes(intolerance)
-      ? selectedIntolerances.filter((i) => i !== intolerance)
+      ? selectedIntolerances.filter((i) => i === intolerance)
       : [...selectedIntolerances, intolerance];
-
+    setSelectedIntolerances(newSelectedIntolerances);
+    onIntoleranceChange(newSelectedIntolerances);
     const params = new URLSearchParams(searchParams);
     if (newSelectedIntolerances.length > 0) {
       params.set("intolerances", newSelectedIntolerances.join(","));
@@ -28,8 +33,6 @@ export function IntolerancesFilter() {
       params.delete("intolerances");
     }
     replace(`${pathname}?${params.toString()}`);
-
-    setSelectedIntolerances(newSelectedIntolerances);
   };
 
   return (
