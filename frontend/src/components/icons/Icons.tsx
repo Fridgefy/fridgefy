@@ -3,7 +3,7 @@ import {
   ShoppingCart,
   MenuSquare,
   User,
-  X,
+  X as Cancel,
   LogIn,
   Plus,
   Trash2,
@@ -19,6 +19,6 @@ export const Icons = {
   user: User,
   plus: Plus,
   trash: Trash2,
-  cancel: X,
+  cancel: Cancel,
   search: Search,
 };
