@@ -52,3 +52,20 @@
   box-shadow: 0px 1px 4.2px 2px var(--foreground);
   border-radius: 0.375rem;
 }
+.card-click {
+  background-color: #db5918dc;
+}
+
+/* 
+--supernova-50: #fffee7;
+--supernova-100: #fffdc1;
+--supernova-200: #fff686;
+--supernova-300: #ffe941;
+--supernova-400: #ffd80d;
+--supernova-500: #ffc800;
+--supernova-600: #d19200;
+--supernova-700: #a66802;
+--supernova-800: #89510a;
+--supernova-900: #74420f;
+--supernova-950: #442204; 
+*/

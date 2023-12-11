@@ -1,25 +1,40 @@
-'use client';
+"use client";
 
-import { usePathname, useSearchParams, useRouter } from 'next/navigation';
+import { usePathname, useSearchParams, useRouter } from "next/navigation";
 
-import './filterStyling.css';
-import Image from 'next/image';
-const intolerance: string[] = ['Dairy', 'Egg', 'Peanut'];
+import "./filterStyling.css";
+import Image from "next/image";
+import { useState } from "react";
+const intolerance: string[] = ["Dairy", "Egg", "Peanut"];
 type Intolerance = (typeof intolerance)[number];
-export function IntolerancesFilter() {
+type IntolerancesFilterProps = {
+  onIntoleranceChange: (selectedIntolerances: string[]) => void;
+};
+export function IntolerancesFilter({
+  onIntoleranceChange,
+}: IntolerancesFilterProps) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
+  const [selectedIntolerances, setSelectedIntolerances] = useState<string[]>(
+    []
+  );
 
-  const handleSelectIntolerance = (Intolerance: Intolerance) => {
+  const handleSelectIntolerance = (intolerance: Intolerance) => {
+    const newSelectedIntolerances = selectedIntolerances.includes(intolerance)
+      ? selectedIntolerances.filter((i) => i === intolerance)
+      : [...selectedIntolerances, intolerance];
+    setSelectedIntolerances(newSelectedIntolerances);
+    onIntoleranceChange(newSelectedIntolerances);
     const params = new URLSearchParams(searchParams);
-    if (Intolerance) {
-      params.set('Intolerance', Intolerance);
+    if (newSelectedIntolerances.length > 0) {
+      params.set("intolerances", newSelectedIntolerances.join(","));
     } else {
-      params.delete('Intolerance');
+      params.delete("intolerances");
     }
     replace(`${pathname}?${params.toString()}`);
   };
+
   return (
     <>
       <h1 className="intolerance-title mb-3">Intolerances</h1>
@@ -27,7 +42,11 @@ export function IntolerancesFilter() {
         {intolerance.map((intolerance, index) => (
           <div
             key={index}
-            className="flex flex-col items-center hover:cursor-pointer"
+            className={`flex flex-col items-center hover:cursor-pointer ${
+              selectedIntolerances.includes(intolerance)
+                ? "bg-accent p-1 border-2 border-black-500 rounded-lg shadow-lg"
+                : "bg-transparent border-2 border-transparent"
+            }`}
             onClick={() => handleSelectIntolerance(intolerance)}
           >
             <Image
