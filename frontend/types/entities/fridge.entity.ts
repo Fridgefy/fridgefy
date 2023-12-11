@@ -1,5 +1,5 @@
 export type Fridge = {
-  id: string;
+  id: number;
   userEmail: string;
   ingredients: string[];
 };

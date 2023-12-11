@@ -1,5 +1,4 @@
 'use server';
-import { v4 as uuidv4 } from 'uuid';
 
 import { Fridge } from '../../../types/entities/fridge.entity';
 import { apiPath } from '../route';
@@ -9,10 +8,7 @@ import { redirect } from 'next/navigation';
 export const createNewFridge = async (userEmail: string) => {
   const path = apiPath.createNewFridge;
 
-  const id = uuidv4();
-
-  const newFridge: Fridge = {
-    id,
+  const newFridge: Omit<Fridge, 'id'> = {
     userEmail,
     ingredients: [],
   };
@@ -50,7 +46,7 @@ export const fetchFridgeData = async (
 };
 
 const updateFridgeData = async (
-  id: string,
+  id: number,
   userEmail: string,
   ingredients: string[]
 ) => {
