@@ -33,7 +33,7 @@ export const fetchFridgeData = async (
 ): Promise<Fridge | undefined> => {
   const path = apiPath.getItemsFromFridge + `?userEmail=${userEmail}`;
   try {
-    const response = await fetch(path);
+    const response = await fetch(path, { cache: "no-store" });
     const data = await response.json();
     if (data.length === 0) {
       return undefined;

@@ -20,7 +20,7 @@ export const fetchMyRecipeByEmail = async (userEmail: string): Promise<MyRecipe 
   const endpoint = `${jsonServerBaseUrl}my-recipes?userEmail=${userEmail}`;
 
   try {
-    const res = await fetch(endpoint, { next: { tags: ["myRecipesByEmail"] } });
+    const res = await fetch(endpoint, { cache: "no-store" });
     handleError(res, "Failed to fetch user's recipe by email");
 
     // Since the data is not searched by id, Return type is: [MyRecipe,...]
@@ -40,7 +40,7 @@ const fetchMyRecipeById = async (id: number): Promise<MyRecipe> => {
   const endpoint = `${jsonServerBaseUrl}my-recipes/${id}`;
 
   try {
-    const res = await fetch(endpoint, { next: { tags: ["myRecipesById"] } });
+    const res = await fetch(endpoint, { cache: "no-store" });
     handleError(res, "Failed to fetch user's recipe by id");
 
     return res.json();
@@ -109,11 +109,14 @@ const createMyRecipe = async ({ userEmail, recipeId }: { userEmail: string; reci
 };
 
 
-const removeMyRecipeById = async ({ id, recipeId }: { id: number; recipeId: number; }): Promise<MyRecipe> => {
-  const endpoint = `${jsonServerBaseUrl}my-recipes/${id}`;
-
+export const removeMyRecipeByEmail = async ({ userEmail, recipeId }: { userEmail: string; recipeId: number; }): Promise<MyRecipe> => {
   try {
-    const myRecipe = await fetchMyRecipeById(id);
+    const myRecipe = await fetchMyRecipeByEmail(userEmail);
+    if (myRecipe === null) {
+      throw new Error("Record not found");
+    }
+
+    const endpoint = `${jsonServerBaseUrl}my-recipes/${myRecipe.id}`;
 
     const reqBody: MyRecipe = {
       ...myRecipe,
@@ -140,7 +143,6 @@ const removeMyRecipeById = async ({ id, recipeId }: { id: number; recipeId: numb
 export const fetchMyRecipeDetails = async (recipeIds: number[]): Promise<RecipeDetail[]> => {
   // https://api.spoonacular.com/recipes/informationBulk?ids=715538,716429
   const endpoint = `${apiPath.getRecipeDetails}&ids=${recipeIds.join(',')}`
-  console.log('endpoint:', endpoint);
 
   try {
     const res = await fetch(endpoint, { next: { tags: ["recipeDetails"] } });
