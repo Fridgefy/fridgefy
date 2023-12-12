@@ -7,6 +7,9 @@ import { RecipeNameFilter } from './Filters/RecipeNameFilter';
 import { RecipeCardsDisplay } from './RecipeCardsDisplay/RecipeCardsDisplay';
 import { fetchRecipeData } from '@/api/recipe/data';
 import { SearchParamsType } from '../../../../../types/commonType';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/app/api/auth/auth';
+import { fetchFridgeData } from '@/api/fridge/data';
 
 type Props = {
   searchParams: SearchParamsType;
@@ -14,6 +17,15 @@ type Props = {
 
 export async function MiddleSection({ searchParams }: Props) {
   const recipes = await fetchRecipeData(searchParams);
+  const session = await getServerSession(authOptions);
+
+  const fridgeData =
+    session &&
+    session.user &&
+    session.user.email &&
+    (await fetchFridgeData(session.user.email));
+
+  const ingredientsInFridge = fridgeData && fridgeData.ingredients;
 
   return (
     <div className="flex justify-center flex-col ">
@@ -26,7 +38,7 @@ export async function MiddleSection({ searchParams }: Props) {
         <div>
           <IntolerancesFilter />
         </div>
-        <IngredientsFilter />
+        <IngredientsFilter ingredientsInFridge={ingredientsInFridge} />
         <div>
           <DietsFilter />
         </div>

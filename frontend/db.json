@@ -2,7 +2,7 @@
   "fridge": [
     {
       "userEmail": "kan0712livepool@gmail.com",
-      "ingredients": [],
+      "ingredients": ["tomato", "cheese"],
       "id": 1
     }
   ]
