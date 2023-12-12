@@ -1,8 +1,8 @@
 export type SearchParamsType = {
   query?: string;
-  cuisine?: string;
-  diet?: string;
-  intolerances?: string;
+  cuisine?: string | string[];
+  diet?: string | string[];
+  intolerances?: string | string[];
   includeIngredients?: string;
 };
 
