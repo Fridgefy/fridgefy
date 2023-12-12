@@ -4,6 +4,45 @@
       "userEmail": "kan0712livepool@gmail.com",
       "ingredients": ["tomato", "cheese"],
       "id": 1
+    },
+    {
+      "ingredients": [
+        "bow tie pasta",
+        "pork chops",
+        "tomato"
+      ],
+      "userEmail": "aoyama.ko0920@gmail.com",
+      "id": 2
+    }
+  ],
+  "my-recipes": [
+    {
+      "userEmail": "aoyama.ko0920@gmail.com",
+      "recipeIds": [
+        715538,
+        716429
+      ],
+      "id": 1
+    }
+  ],
+  "ingredients-to-buy": [
+    {
+      "userEmail": "aoyama.ko0920@gmail.com",
+      "ingredients": [
+        "recipe makers chicken bruschetta pasta",
+        "cauliflower florets",
+        "cheese",
+        "extra virgin olive oil",
+        "pasta",
+        "couple of pepper flakes",
+        "salt and pepper",
+        "scallions",
+        "white wine",
+        "bread crumbs",
+        "butter",
+        "carrot"
+      ],
+      "id": 1
     }
   ]
 }
