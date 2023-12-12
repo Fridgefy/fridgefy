@@ -1,5 +1,3 @@
-'use client';
-
 import React, { useState, useEffect } from 'react';
 import { CuisinesFilter } from './Filters/CuisinesFilter';
 import { IntolerancesFilter } from './Filters/IntolerancesFilter';
@@ -9,64 +7,38 @@ import { RecipeNameFilter } from './Filters/RecipeNameFilter';
 import { RecipeCardsDisplay } from './RecipeCardsDisplay/RecipeCardsDisplay';
 import { fetchRecipeData } from '@/api/recipe/data';
 import { SearchParamsType } from '../../../../../types/commonType';
-import { Recipe } from '../../../../../types/models';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/app/api/auth/auth';
+import { fetchFridgeData } from '@/api/fridge/data';
+
 type Props = {
   searchParams: SearchParamsType;
 };
 
-export function MiddleSection() {
-  const [searchParams, setSearchParams] = useState<SearchParamsType>({});
-  const [recipes, setRecipes] = useState<Recipe[] | null>(null);
+export async function MiddleSection({ searchParams }: Props) {
+  const recipes = await fetchRecipeData(searchParams);
+  const session = await getServerSession(authOptions);
 
-  const updateSearchParams = (newParams: Partial<SearchParamsType>) => {
-    setSearchParams((prevParams) => ({
-      ...prevParams,
-      ...newParams,
+  const fridgeData =
+    session &&
+    session.user &&
+    session.user.email &&
+    (await fetchFridgeData(session.user.email));
 
-      // Check if cuisine is an array and join it, otherwise, leave it as it is
-      cuisine: Array.isArray(newParams.cuisine)
-        ? newParams.cuisine.join(',')
-        : newParams.cuisine,
-
-      intolerances: Array.isArray(newParams.intolerances)
-        ? newParams.intolerances.join(',')
-        : newParams.intolerances,
-    }));
-  };
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const recipeData = await fetchRecipeData(searchParams);
-        setRecipes(recipeData || null);
-      } catch (error) {
-        console.error('Failed to fetch recipes:', error);
-        setRecipes(null);
-      }
-    }
-
-    fetchData();
-  }, [searchParams]);
+  const ingredientsInFridge = fridgeData && fridgeData.ingredients;
 
   return (
     <div className="flex justify-center flex-col ">
       <RecipeNameFilter />
       <hr className="top-5 left-0 right-0" />
       <div className="border-b mb-2">
-        <CuisinesFilter
-          onCuisineChange={(selectedCuisines) =>
-            updateSearchParams({ cuisine: selectedCuisines })
-          }
-        />
+        <CuisinesFilter />
       </div>
       <div className="filter-container border-b ">
         <div>
-          <IntolerancesFilter
-            onIntoleranceChange={(selectedIntolerances) =>
-              updateSearchParams({ intolerances: selectedIntolerances })
-            }
-          />
+          <IntolerancesFilter />
         </div>
-        <IngredientsFilter />
+        <IngredientsFilter ingredientsInFridge={ingredientsInFridge} />
         <div>
           <DietsFilter />
         </div>

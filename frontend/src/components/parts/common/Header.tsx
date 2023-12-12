@@ -4,7 +4,6 @@ import { siteConfig } from '@/confg/site';
 import { buttonVariants } from '@/components/ui';
 import Image from 'next/image';
 import { cn } from '@/lib/tailwind/utils';
-import { Icons } from '@/components/icons/Icons';
 import { AuthButton } from './AuthButton';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/auth';
