@@ -1,23 +1,21 @@
-"use client";
+'use client';
 
-import { usePathname, useSearchParams, useRouter } from "next/navigation";
+import { usePathname, useSearchParams, useRouter } from 'next/navigation';
 
-import React, { useState } from "react";
-import "./filterStyling.css";
-import Image from "next/image";
+import React, { useState } from 'react';
+import './filterStyling.css';
+import Image from 'next/image';
 const cuisines: string[] = [
-  "Japanese",
-  "Mexican",
-  "Chinese",
-  "Greek",
-  "Italian",
-  "French",
+  'Japanese',
+  'Mexican',
+  'Chinese',
+  'Greek',
+  'Italian',
+  'French',
 ];
-type CuisinesFilterProps = {
-  onCuisineChange: (selectedCuisines: string[]) => void;
-};
+
 type Cuisine = (typeof cuisines)[number];
-export function CuisinesFilter({ onCuisineChange }: CuisinesFilterProps) {
+export function CuisinesFilter() {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
@@ -29,13 +27,16 @@ export function CuisinesFilter({ onCuisineChange }: CuisinesFilterProps) {
       : [...selectedCuisines, cuisine];
 
     setSelectedCuisines(newSelectedCuisines);
-    onCuisineChange(newSelectedCuisines);
     const params = new URLSearchParams(searchParams);
 
     if (newSelectedCuisines.length > 0) {
-      params.set("cuisine", newSelectedCuisines.join(","));
+      if (newSelectedCuisines.length > 1) {
+        params.set('cuisine', newSelectedCuisines.join(','));
+      } else {
+        params.set('cuisine', newSelectedCuisines[0]);
+      }
     } else {
-      params.delete("cuisine");
+      params.delete('cuisine');
     }
 
     replace(`${pathname}?${params.toString()}`);
@@ -51,8 +52,8 @@ export function CuisinesFilter({ onCuisineChange }: CuisinesFilterProps) {
             key={index}
             className={`flex flex-col items-center hover:cursor-pointer ${
               selectedCuisines.includes(cuisine)
-                ? "card-click p-1 border-2 border-black-500 rounded-lg shadow-lg"
-                : "bg-transparent border-2 border-transparent"
+                ? 'card-click p-1 border-2 border-black-500 rounded-lg shadow-lg'
+                : 'bg-transparent border-2 border-transparent'
             }`}
             onClick={() => handleSelectCuisine(cuisine)}
           >
