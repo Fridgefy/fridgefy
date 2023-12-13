@@ -9,10 +9,8 @@ import { fetchFridgeData } from "@/api/fridge/data";
 
 export default async function ShoppingList() {
   const session = await getServerSession(authOptions);
-  if (session === null) {
-    redirect("/");
-  }
-  const userEmail = session. user?.email || '';
+
+  const userEmail = session?. user?.email || '';
 
   const fridge = await fetchFridgeData(userEmail);
   const ingredientsInFridge = fridge ? fridge.ingredients : [];
