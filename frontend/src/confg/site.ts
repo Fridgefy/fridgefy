@@ -14,7 +14,7 @@ export const siteConfig = {
       href: '/recipes',
     },
     {
-      title: 'Shopping Cart',
+      title: 'Shopping List',
       href: '/shopping-list',
     },
   ],

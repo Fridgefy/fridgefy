@@ -1,13 +1,15 @@
-import { useState } from "react";
-import "../ShoppingList/RecipeAccordionStyling.css";
-import Image from "next/image";
+'use client';
+
+import { useState } from 'react';
+import '../ShoppingList/RecipeAccordionStyling.css';
+import Image from 'next/image';
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion";
-import { Icons } from "@/components/icons/Icons";
+} from '@/components/ui/accordion';
+import { Icons } from '@/components/icons/Icons';
 type Ingredient = {
   id: number;
   name: string;
@@ -74,7 +76,7 @@ const RecipeAccordion = ({
       onClick={toggleOpen}
     >
       <AccordionItem value="item-1" className="border-none">
-        <AccordionTrigger className={`${isOpen ? "border-b" : ""} text-muted`}>
+        <AccordionTrigger className={`${isOpen ? 'border-b' : ''} text-muted`}>
           <div className="w-full flex justify-between items-center">
             <p className="text-lg font-bold recipe-shadow">{title}</p>
             <div onClick={handleDelete}>
@@ -107,10 +109,10 @@ const RecipeAccordion = ({
             <div className="w-1/3 flex flex-col pl-3">
               <div className="h-32 pb-3 mb-4 pt-2">
                 <Image
-                  src={imageUrl || ""}
+                  src={imageUrl || ''}
                   width={200}
                   height={250}
-                  style={{ objectFit: "cover" }}
+                  style={{ objectFit: 'cover' }}
                   alt={`${title} image`}
                   className="rounded-md"
                 />

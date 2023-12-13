@@ -12,15 +12,13 @@ import { getServerSession } from 'next-auth';
 // to `NextAuth` in `app/api/auth/[...nextauth]/route.ts`
 export const authOptions = {
   secret: process.env.NEXTAUTH_SECRET,
+
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID ?? '',
       clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? '',
     }),
   ],
-  pages: {
-    signIn: "/",
-  },
 } satisfies NextAuthOptions;
 
 // Use it in server contexts

@@ -1,27 +1,29 @@
-"use server";
+'use server';
 
 import { revalidateTag } from 'next/cache';
 import { MyRecipe } from '../../../types/models';
 
 const port = 3005;
-const apiKey = process.env.SPOONACULAR_API_KEY;
+const apiKey = process.env.NEXT_PUBLIC_SPOONACULAR_API_KEY;
 const jsonServerBaseUrl = `http://localhost:${port}/`;
 
 type IngredientsToBuy = {
-  id: number
-  userEmail: string
-  ingredients: string[]
+  id: number;
+  userEmail: string;
+  ingredients: string[];
 };
 
-export const fetchIngredientsToBuyByEmail = async (userEmail: string): Promise<IngredientsToBuy | null> => {
+export const fetchIngredientsToBuyByEmail = async (
+  userEmail: string
+): Promise<IngredientsToBuy | null> => {
   const endpoint = `${jsonServerBaseUrl}ingredients-to-buy?userEmail=${userEmail}`;
 
   try {
-    const res = await fetch(endpoint, { cache: "no-store" });
-    if (!res.ok) throw new Error("Failed to fetch ingredients to buy");
+    const res = await fetch(endpoint, { cache: 'no-store' });
+    if (!res.ok) throw new Error('Failed to fetch ingredients to buy');
 
-    const list = await(res.json()) as IngredientsToBuy[];
-    if (list.length > 1) throw new Error("Found multiple records");
+    const list = (await res.json()) as IngredientsToBuy[];
+    if (list.length > 1) throw new Error('Found multiple records');
     if (!list.length) return null;
 
     return list[0];
@@ -31,12 +33,14 @@ export const fetchIngredientsToBuyByEmail = async (userEmail: string): Promise<I
   }
 };
 
-const fetchIngredientsToBuyById = async (id: number): Promise<IngredientsToBuy> => {
+const fetchIngredientsToBuyById = async (
+  id: number
+): Promise<IngredientsToBuy> => {
   const endpoint = `${jsonServerBaseUrl}ingredients-to-buy/${id}`;
 
   try {
-    const res = await fetch(endpoint, { cache: "no-store" });
-    if (!res.ok) throw new Error("Failed to fetch ingredients to buy");
+    const res = await fetch(endpoint, { cache: 'no-store' });
+    if (!res.ok) throw new Error('Failed to fetch ingredients to buy');
 
     return res.json();
   } catch (error) {
@@ -45,23 +49,29 @@ const fetchIngredientsToBuyById = async (id: number): Promise<IngredientsToBuy> 
   }
 };
 
-const createIngredientToBuyRecord = async ({ userEmail, ingredientName }: { userEmail: string; ingredientName: string; }): Promise<IngredientsToBuy> => {
+const createIngredientToBuyRecord = async ({
+  userEmail,
+  ingredientName,
+}: {
+  userEmail: string;
+  ingredientName: string;
+}): Promise<IngredientsToBuy> => {
   const endpoint = `${jsonServerBaseUrl}ingredients-to-buy`;
 
-  const reqBody: Omit<IngredientsToBuy, "id"> = {
+  const reqBody: Omit<IngredientsToBuy, 'id'> = {
     userEmail,
-    ingredients: [ingredientName]
+    ingredients: [ingredientName],
   };
 
   try {
     const res = await fetch(endpoint, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(reqBody),
     });
-    if (!res.ok) throw new Error("Failed to create ingredients to buy");
+    if (!res.ok) throw new Error('Failed to create ingredients to buy');
 
     return res.json();
   } catch (error) {
@@ -69,9 +79,14 @@ const createIngredientToBuyRecord = async ({ userEmail, ingredientName }: { user
   }
 };
 
-
 // TODO: filter (ingredients in the fridge)
-export const createIngredientsToBuy = async ({ userEmail, ingredientName }: { userEmail: string; ingredientName: string }): Promise<IngredientsToBuy> => {
+export const createIngredientsToBuy = async ({
+  userEmail,
+  ingredientName,
+}: {
+  userEmail: string;
+  ingredientName: string;
+}): Promise<IngredientsToBuy> => {
   const ingredientsToBuy = await fetchIngredientsToBuyByEmail(userEmail);
 
   try {
@@ -88,43 +103,13 @@ export const createIngredientsToBuy = async ({ userEmail, ingredientName }: { us
     };
 
     const res = await fetch(endpoint, {
-      method: "PATCH",
+      method: 'PATCH',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(reqBody),
     });
-    if (!res.ok) throw new Error("Failed to update ingredients to buy");
-
-    return res.json();
-  } catch (error) {
-    console.error(error);
-    throw error;
-  }
-}
-
-export const removeIngredientsToBuy = async ({ userEmail, ingredientName }: { userEmail: string; ingredientName: string }): Promise<IngredientsToBuy> => {
-  try {
-    const record = await fetchIngredientsToBuyByEmail(userEmail);
-    if (record === null) throw new Error("Record not found");
-
-    const endpoint = `${jsonServerBaseUrl}ingredients-to-buy/${record.id}`;
-    const reqBody: IngredientsToBuy = {
-      id: record.id,
-      userEmail: record.userEmail,
-      ingredients: record.ingredients.filter(ingredientNameToBuy => ingredientNameToBuy !== ingredientName),
-    };
-
-    const res = await fetch(endpoint, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(reqBody),
-    });
-    if (!res.ok) throw new Error("Failed to update ingredients to buy");
-
-    revalidateTag("ingredientsToBuy");
+    if (!res.ok) throw new Error('Failed to update ingredients to buy');
 
     return res.json();
   } catch (error) {
@@ -133,27 +118,73 @@ export const removeIngredientsToBuy = async ({ userEmail, ingredientName }: { us
   }
 };
 
-export const removeIngredientsToBuyBulk = async ({ userEmail, ingredientNames }: {userEmail: string; ingredientNames: string[]}) => {
+export const removeIngredientsToBuy = async ({
+  userEmail,
+  ingredientName,
+}: {
+  userEmail: string;
+  ingredientName: string;
+}): Promise<IngredientsToBuy> => {
   try {
     const record = await fetchIngredientsToBuyByEmail(userEmail);
-    if (record === null) throw new Error("Record not found");
+    if (record === null) throw new Error('Record not found');
+
+    const endpoint = `${jsonServerBaseUrl}ingredients-to-buy/${record.id}`;
+    const reqBody: IngredientsToBuy = {
+      id: record.id,
+      userEmail: record.userEmail,
+      ingredients: record.ingredients.filter(
+        (ingredientNameToBuy) => ingredientNameToBuy !== ingredientName
+      ),
+    };
+
+    const res = await fetch(endpoint, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(reqBody),
+    });
+    if (!res.ok) throw new Error('Failed to update ingredients to buy');
+
+    revalidateTag('ingredientsToBuy');
+
+    return res.json();
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+export const removeIngredientsToBuyBulk = async ({
+  userEmail,
+  ingredientNames,
+}: {
+  userEmail: string;
+  ingredientNames: string[];
+}) => {
+  try {
+    const record = await fetchIngredientsToBuyByEmail(userEmail);
+    if (record === null) throw new Error('Record not found');
 
     const endpoint = `${jsonServerBaseUrl}ingredients-to-buy/${record.id}`;
 
     const reqBody: IngredientsToBuy = {
       id: record.id,
       userEmail: record.userEmail,
-      ingredients: record.ingredients.filter(ingredientName => !ingredientNames.includes(ingredientName)),
+      ingredients: record.ingredients.filter(
+        (ingredientName) => !ingredientNames.includes(ingredientName)
+      ),
     };
 
     const res = await fetch(endpoint, {
-      method: "PATCH",
+      method: 'PATCH',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(reqBody),
     });
-    if (!res.ok) throw new Error("Failed to update ingredients to buy");
+    if (!res.ok) throw new Error('Failed to update ingredients to buy');
 
     return res.json();
   } catch (error) {

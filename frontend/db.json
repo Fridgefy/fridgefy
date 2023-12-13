@@ -1,8 +1,11 @@
 {
   "fridge": [
     {
+      "ingredients": [
+        "tomato",
+        "cheese"
+      ],
       "userEmail": "kan0712livepool@gmail.com",
-      "ingredients": ["tomato", "cheese"],
       "id": 1
     },
     {
@@ -23,6 +26,14 @@
         716429
       ],
       "id": 1
+    },
+    {
+      "userEmail": "kan0712livepool@gmail.com",
+      "recipeIds": [
+        715538,
+        716429
+      ],
+      "id": 2
     }
   ],
   "ingredients-to-buy": [
@@ -43,6 +54,11 @@
         "carrot"
       ],
       "id": 1
+    },
+    {
+      "userEmail": "kan0712livepool@gmail.com",
+      "ingredients": [],
+      "id": 2
     }
   ]
 }

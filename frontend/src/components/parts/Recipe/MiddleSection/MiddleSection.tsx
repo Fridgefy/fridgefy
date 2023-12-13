@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { CuisinesFilter } from './Filters/CuisinesFilter';
 import { IntolerancesFilter } from './Filters/IntolerancesFilter';
 import { IngredientsFilter } from './Filters/IngredientsFilter';
